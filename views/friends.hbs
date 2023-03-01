@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  {{> headSharedStyleScript}}
+  <title>Drakosha friends</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.6.1/dist/simpleParallax.min.js"></script>
+</head>
+<body>
+<header class="header_meet">
+  {{> header}}
+</header>
+<main>
+
+  <section>
+    <h3 class="review__subtitle">Drakosh больше чем ты думаешь. </h3>
+    <h2 class="review__title">Мои друзья </h2>
+    <div class="album">
+      <div class="album__preview">
+        <!-- Инициализация изображения классом thumbnail      -->
+        <img class="photo_friends thumbnail" src="css/images/bezzubic.jpg" alt="">
+        <h4 class="album__name">Bezzubik</h4>
+        <p class="album__text">
+          Летает с камерой и без квадракоптера
+        </p>
+      </div>
+      <div class="album__preview">
+        <!-- Инициализация изображения классом thumbnail      -->
+        <img class="photo_friends thumbnail" src="css/images/dino.jpg" alt="">
+        <h4 class="album__name">Dino</h4>
+        <p class="album__text">
+          Обрабает звук лучше любого дракона (не уверена что у них есть уши)
+        </p>
+      </div>
+      <div class="album__preview">
+        <!-- Инициализация изображения классом thumbnail      -->
+        <img class="photo_friends thumbnail" src="css/images/tironazavrik.jpg" alt="">
+        <h4 class="album__name">Tironazavrik</h4>
+        <p class="album__text">
+          Программирует на Си-Шарпе
+        </p>
+      </div>
+    </div>
+    <div>
+            <pre><code class="code">
+                if (Drakosha < любой дракон) {
+                    console.log('Error!'); // невозможно
+                }
+            </code></pre>
+    </div>
+  </section>
+  <div class="table">
+    <div class="wrap-title">
+      <div class="id_table">
+        <h4>#</h4>
+      </div>
+      <div class="name_drak">
+        <h4> Name </h4>
+      </div>
+      <div class="knowledge">
+        <h4>Уровень знаний</h4>
+      </div>
+      <div class="danger">
+        <h4>Уровень опасности</h4>
+      </div>
+      <div class="language_table">
+        <h4> Язык</h4>
+      </div>
+    </div>
+    <div class="wrap-item">
+      <div class="id_table">
+        1
+      </div>
+      <div class="name_drak">
+        Dan
+      </div>
+      <div class="knowledge">
+        25%
+      </div>
+      <div class="danger">
+        40%
+      </div>
+      <div class="language_table">
+        Java
+      </div>
+    </div>
+    <div class="wrap-item">
+      <div class="id_table">
+        2
+      </div>
+      <div class="name_drak">
+        Drakosha
+      </div>
+      <div class="knowledge">
+        80%
+      </div>
+      <div class="danger">
+        100%
+      </div>
+      <div class="language_table">
+        Огонь
+      </div>
+    </div>
+    <div class="wrap-item">
+      <div class="id_table">
+        3
+      </div>
+      <div class="name_drak">
+        Tom
+      </div>
+      <div class="knowledge">
+        45%
+      </div>
+      <div class="danger">
+        0%
+      </div>
+      <div class="language_table">
+        C#
+      </div>
+    </div>
+  </div>
+  <div class="other_friends">
+    <h3 class="review__subtitle">Альбом других наших друзей. </h3>
+    <!-- Slider main container -->
+    <div class="swiper">
+      <!-- Additional required wrapper -->
+      <div class="swiper-wrapper">
+        <!-- Slides -->
+        <div class="swiper-slide">
+
+          <img src="css/images/tom.jpg" alt="Tom" />
+          <h4 class="album__name">Tom</h4>
+        </div>
+        <div class="swiper-slide">
+          <img src="css/images/mia.jpg" alt="Mia" />
+          <h4 class="album__name">Mia</h4>
+        </div>
+        <div class="swiper-slide">
+          <img src="css/images/sherlok.jpg" alt="Sherlock" />
+          <h4 class="album__name">Sherlock</h4>
+        </div>
+        ...
+      </div>
+
+      <!-- If we need navigation buttons -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+
+    </div>
+
+
+  </div>
+
+</main>
+<footer>
+    {{>footer}}
+</footer>
+<script src="script/navigation.js"></script>
+<script src="script/swiperAlbum.js"></script>
+<script src="script/parallaxAlbum.js"></script>
+
+
+</body>
+</html>

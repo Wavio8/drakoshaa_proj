@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  {{> headSharedStyleScript}}
+  <title>Drakosha ask</title>
+</head>
+<body>
+  <header class="header_meet">
+    {{> header}}
+  </header>
+
+<main>
+ <div class="logged">
+   <h2 class="logged__subtitle">You logged as {{user}}!</h2>
+   <a class="blubtn" href='/ask' type="button" >Log Out</a>
+ </div>
+
+  <section class="footer_section">
+    <h3 class="review__subtitle">Передай пожелание Дракоше! </h3>
+    <h2 class="review__title">Спроси у Дракоши </h2>
+    <form class="ask__form">
+      <label>
+        <input  type="text" class="ask_drakosha" placeholder="ask Drakosha...">
+      </label>
+      <button type="submit" class="ask__button">Send to Drakosha</button>
+    </form>
+    <ol class="ask__question"></ol>
+
+  </section>
+
+
+</main>
+<footer>
+    {{>footer}}
+</footer>
+<script src="/script/navigation.js"></script>
+<script src="/script/questions.js"></script>
+</body>
+</html>
