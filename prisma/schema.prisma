@@ -27,15 +27,23 @@ model Friend {
   projects Project?
   client    User?    @relation(fields: [clientId], references: [id])
   clientId  Int?
-  skill Skill[]
+  friendSkill FriendToSkill[]
 }
 
 model Skill{
   id        Int      @default(autoincrement()) @id
   skill String
-  client    Friend?    @relation(fields: [studentId], references: [id])
-  studentId  Int?
+
   level Int
+  friendSkill FriendToSkill[]
+
+}
+model FriendToSkill{
+    id        Int      @default(autoincrement()) @id
+    client    Friend?    @relation(fields: [studentId], references: [id])
+    studentId  Int?
+    skill    Skill?    @relation(fields: [skillId], references: [id])
+    skillId  Int?
 }
 
 model Project {
