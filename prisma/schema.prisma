@@ -17,7 +17,7 @@ model User {
   login String
   password Int
   friends Friend[]
-  post Post[]
+  post Posts[]
 }
 
 model Friend {
@@ -54,7 +54,7 @@ model Project {
   friendId Int @unique
 }
 
-model Post {
+model Posts {
   id        Int      @default(autoincrement()) @id
   title     String
   content   String?
