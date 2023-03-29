@@ -5,10 +5,13 @@ import {
   NotImplementedException,
   Post,
   Query,
+  Param,
+  Body,
+  Put,
 } from '@nestjs/common';
 import { PostService } from './post.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Posts } from '@prisma/client';
+import { Friend, Posts, User } from '@prisma/client';
 
 @ApiTags('Post')
 @Controller('post')
@@ -16,57 +19,99 @@ export class PostController {
   constructor(private postService: PostService) {}
 
   @ApiOperation({
-    summary: 'Get all facts Get information about me',
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'OK',
-  })
-  @ApiResponse({
-    status: 403,
-    description: 'Access denied',
+    summary: 'Get all posts',
   })
   @ApiResponse({
     status: 501,
     description: 'Not implemented',
   })
+  @ApiResponse({
+    status: 200,
+    description: 'OK',
+  })
   @Get('all')
-  public async getAllFacts(): Promise<Posts[]> {
+  public async getAllPosts(): Promise<Posts[]> {
+    throw new NotImplementedException();
+  }
+  @ApiOperation({
+    summary: 'Get post by ID',
+  })
+  @ApiResponse({
+    status: 501,
+    description: 'Not implemented',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'OK',
+  })
+  @Get('/:id')
+  public async getPostById(@Param('id') id: number): Promise<User> {
+    throw new NotImplementedException();
+  }
+  @ApiOperation({
+    summary: 'Get filtered Posts',
+  })
+  @ApiResponse({
+    status: 501,
+    description: 'Not implemented',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'OK',
+  })
+  @Get('/:filter')
+  public async getFilteredPosts(
+    @Param('filter') filter: string,
+  ): Promise<Posts> {
     throw new NotImplementedException();
   }
 
-  // @Get(':username')
-  // async getProfile(@User('id') userId: number, @Param('username') username: string): Promise<ProfileRO> {
-  //   return await this.profileService.findProfile(userId, username);
-  // }
+  @ApiOperation({
+    summary: 'Add a new Post',
+  })
+  @ApiResponse({
+    status: 501,
+    description: 'Not implemented',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'OK',
+  })
+  @Post('add')
+  public async addPost(
+    @Body() postsData: { title: string; content?: string; authorId: number },
+  ): Promise<Posts> {
+    throw new NotImplementedException();
+  }
 
-  // // Чисто коммент для разрыва
-  // @ApiOperation({
-  //   summary: 'Add a new information',
-  // })
-  // @ApiResponse({
-  //   status: 501,
-  //   description: 'Not implemented',
-  // })
-  // @Post()
-  // public addInformation() {
-  //   throw new NotImplementedException();
-  // }
-  //
-  // // Чисто коммент для разрыва
-  // @ApiOperation({
-  //   summary: 'Delete information by id',
-  // })
-  // @ApiResponse({
-  //   status: 501,
-  //   description: 'Not implemented',
-  // })
-  // @ApiParam({
-  //   name: 'id',
-  //   type: 'int',
-  // })
-  // @Delete()
-  // public delete(@Query('id', ParseIntPipe) id: number) {
-  //   throw new NotImplementedException();
-  // }
+  @ApiOperation({
+    summary: 'Update Post by ID',
+  })
+  @ApiResponse({
+    status: 501,
+    description: 'Not implemented',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'OK',
+  })
+  @Put('update/:id')
+  async UpdatePost(@Param('id') id: number): Promise<Posts> {
+    throw new NotImplementedException();
+  }
+  @ApiOperation({
+    summary: 'Delete post by ID',
+  })
+  @ApiResponse({
+    status: 501,
+    description: 'Not implemented',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'OK',
+  })
+  @Delete('delete/:id')
+  public async deletePostById(@Param('id') id: number): Promise<Posts> {
+    throw new NotImplementedException();
+  }
 }
