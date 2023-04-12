@@ -7,11 +7,15 @@ import {
   Query,
   Param,
   Body,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Friend, Posts, Project, User } from '@prisma/client';
 import { ProjectService } from './project.service';
+
+import { ProjectDto } from './dto/project.dto';
 
 @ApiTags('Project')
 @Controller('project')
@@ -31,7 +35,7 @@ export class ProjectController {
   })
   @Get('all')
   public async getAllProjects(): Promise<Project[]> {
-    throw new NotImplementedException();
+    return this.projectService.projects({});
   }
   @ApiOperation({
     summary: 'Add a new Project',
@@ -45,10 +49,15 @@ export class ProjectController {
     description: 'OK',
   })
   @Post('add')
-  public async addProject(
-    @Body() projectData: { name: string; link: string },
-  ): Promise<Project> {
-    throw new NotImplementedException();
+  public async addProject(@Body() projectData: ProjectDto): Promise<Project> {
+    const { name, link, friendId } = projectData;
+    return this.projectService.createProject({
+      name,
+      link,
+      friend: {
+        connect: { id: friendId },
+      },
+    });
   }
 
   @ApiOperation({
@@ -62,8 +71,13 @@ export class ProjectController {
     status: 200,
     description: 'OK',
   })
-  @Delete('delete/:id')
+  @Delete('/:id')
   public async deleteProjectById(@Param('id') id: number): Promise<Project> {
-    throw new NotImplementedException();
+    const findProject = this.projectService.project({ id: Number(id) });
+    if (findProject != null) {
+      return this.projectService.deleteProject({ id: Number(id) });
+    } else {
+      throw new HttpException('Project not exist', HttpStatus.BAD_REQUEST);
+    }
   }
 }

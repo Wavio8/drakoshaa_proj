@@ -6,13 +6,15 @@ import {
   Post,
   Query,
   Param,
-  Body,
-} from '@nestjs/common';
+  Body, HttpException, HttpStatus
+} from "@nestjs/common";
 
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Skill, User } from '@prisma/client';
 
 import { SkillService } from './skill.service';
+import { UserDto } from "../user/dto/user.dto";
+import { SkillDto } from "./dto/skill.dto";
 
 @ApiTags('Skill')
 @Controller('skill')
@@ -20,7 +22,7 @@ export class SkillController {
   constructor(private skillService: SkillService) {}
 
   @ApiOperation({
-    summary: 'Get skill by name',
+    summary: 'Get skill by id',
   })
   @ApiResponse({
     status: 501,
@@ -30,9 +32,9 @@ export class SkillController {
     status: 200,
     description: 'OK',
   })
-  @Get('/:name')
-  public async getSkillById(@Param('name') name: string): Promise<Skill> {
-    throw new NotImplementedException();
+  @Get('/:id')
+  public async getSkillById(@Param('id') id: number): Promise<Skill> {
+    return this.skillService.skill({ id: Number(id) });
   }
 
   @ApiOperation({
@@ -48,13 +50,11 @@ export class SkillController {
   })
   @Post('add')
   public async addSkill(
-    @Body() id: number,
-    name: string,
-    level: number,
+    @Body()
+    skillData: SkillDto,
   ): Promise<Skill> {
-    throw new NotImplementedException();
+    return this.skillService.createSkill(skillData);
   }
-
   @ApiOperation({
     summary: 'Delete skill by ID',
   })
@@ -66,8 +66,13 @@ export class SkillController {
     status: 200,
     description: 'OK',
   })
-  @Delete('delete/:id')
+  @Delete('/:id')
   public async deleteSkillById(@Param('id') id: number): Promise<Skill> {
-    throw new NotImplementedException();
+    const findUSkill = this.skillService.skill({ id: Number(id) });
+    if (findUSkill != null) {
+      return this.skillService.deleteSkill({ id: Number(id) });
+    } else {
+      throw new HttpException('User not exist', HttpStatus.BAD_REQUEST);
+    }
   }
 }

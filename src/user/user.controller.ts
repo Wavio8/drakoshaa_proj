@@ -7,12 +7,15 @@ import {
   Query,
   Param,
   Body,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { User } from '@prisma/client';
 
 import { UserService } from './user.service';
+import { UserDto } from './dto/user.dto';
 
 @ApiTags('User')
 @Controller('user')
@@ -32,7 +35,7 @@ export class UserController {
   })
   @Get('all')
   public async getAllUsers(): Promise<User[]> {
-    throw new NotImplementedException();
+    return this.userService.users({});
   }
 
   @ApiOperation({
@@ -48,15 +51,15 @@ export class UserController {
   })
   @Get('/:id')
   public async getUserById(@Param('id') id: number): Promise<User> {
-    throw new NotImplementedException();
+    return this.userService.user({ id: Number(id) });
   }
 
   @ApiOperation({
     summary: 'Add a new User',
   })
   @ApiResponse({
-    status: 501,
-    description: 'Not implemented',
+    status: 201,
+    description: 'User created',
   })
   @ApiResponse({
     status: 200,
@@ -64,11 +67,10 @@ export class UserController {
   })
   @Post('add')
   public async addUser(
-    @Body() id: number,
-    email: string,
-    name: string,
+    @Body()
+    userData: UserDto,
   ): Promise<User> {
-    throw new NotImplementedException();
+    return this.userService.createUser(userData);
   }
 
   @ApiOperation({
@@ -82,8 +84,13 @@ export class UserController {
     status: 200,
     description: 'OK',
   })
-  @Delete('delete/:id')
+  @Delete('/:id')
   public async deleteUserById(@Param('id') id: number): Promise<User> {
-    throw new NotImplementedException();
+    const findUser = this.userService.user({ id: Number(id) });
+    if (findUser != null) {
+      return this.userService.deleteUser({ id: Number(id) });
+    } else {
+      throw new HttpException('User not exist', HttpStatus.BAD_REQUEST);
+    }
   }
 }
