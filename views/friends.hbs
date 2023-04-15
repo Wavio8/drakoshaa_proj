@@ -17,31 +17,49 @@
     <h3 class="review__subtitle">Drakosh больше чем ты думаешь. </h3>
     <h2 class="review__title">Мои друзья </h2>
     <div class="album">
-      <div class="album__preview">
+      <div class="album__preview" data-skill-id="4">
         <!-- Инициализация изображения классом thumbnail      -->
         <img class="photo_friends thumbnail" src="css/images/bezzubic.jpg" alt="">
         <h4 class="album__name">Bezzubik</h4>
         <p class="album__text">
-          Летает с камерой и без квадракоптера
+<!--          Летает с камерой и без квадракоптера-->
         </p>
       </div>
-      <div class="album__preview">
+      <div class="album__preview" data-skill-id="5">
         <!-- Инициализация изображения классом thumbnail      -->
         <img class="photo_friends thumbnail" src="css/images/dino.jpg" alt="">
         <h4 class="album__name">Dino</h4>
         <p class="album__text">
-          Обрабает звук лучше любого дракона (не уверена что у них есть уши)
+<!--          Обрабает звук лучше любого дракона (не уверена что у них есть уши)-->
         </p>
       </div>
-      <div class="album__preview">
+      <div class="album__preview" data-skill-id="6">
         <!-- Инициализация изображения классом thumbnail      -->
         <img class="photo_friends thumbnail" src="css/images/tironazavrik.jpg" alt="">
         <h4 class="album__name">Tironazavrik</h4>
         <p class="album__text">
-          Программирует на Си-Шарпе
+<!--          Программирует на Си-Шарпе-->
         </p>
       </div>
     </div>
+<!--    <h1>Посты</h1>-->
+
+<!--    {{#if posts.length}}-->
+<!--      <ul>-->
+<!--        {{#each posts}}-->
+<!--          <li>-->
+<!--            <h3>{{this.title}}</h3>-->
+<!--            <p>{{this.content}}</p>-->
+<!--          </li>-->
+<!--        {{/each}}-->
+<!--      </ul>-->
+<!--    {{else}}-->
+<!--      <p>Нет постов.</p>-->
+<!--    {{/if}}-->
+
+    <a href="#" id="show-more-friends">Показать имена всех друзей</a>
+    <ul id="friend-list"></ul>
+
     <div>
             <pre><code class="code">
                 if (Drakosha < любой дракон) {
@@ -159,7 +177,8 @@
 <script src="script/navigation.js"></script>
 <script src="script/swiperAlbum.js"></script>
 <script src="script/parallaxAlbum.js"></script>
-
+<script src="script/friendsFromBD.js"></script>
+<script src="script/skillByIdFromBD.js"></script>
 
 </body>
 </html>

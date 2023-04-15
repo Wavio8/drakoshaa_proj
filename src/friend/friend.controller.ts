@@ -36,8 +36,10 @@ export class FriendController {
     description: 'OK',
   })
   @Get('all')
-  public async getAllFriends(): Promise<Friend[]> {
-    return this.friendService.friends({});
+  public async getAllFriends(): Promise<{ friends: Friend[] }> {
+    const friends = await this.friendService.friends({});
+    return { friends };
+    // return this.friendService.friends({});
   }
 
   @ApiOperation({
@@ -76,7 +78,9 @@ export class FriendController {
       where: { studentId: Number(id) },
     });
 
-    friendWithSkill.friend = await this.friendService.friend({ id: Number(id) });
+    friendWithSkill.friend = await this.friendService.friend({
+      id: Number(id),
+    });
     return friendWithSkill;
   }
 

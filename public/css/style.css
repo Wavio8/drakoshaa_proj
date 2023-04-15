@@ -611,3 +611,17 @@ a.blubtn:active {
     transition: .07s;
     background-color: #FFF;
 }
+
+#show-more-friends {
+    display: inline-block;
+    background-color: #dbefff;
+    padding: 10px 20px;
+    margin-left: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    color: #1959d1;
+    text-decoration: none;
+}
+.projBd{
+    color: #444c65;
+}

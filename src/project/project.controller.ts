@@ -9,6 +9,7 @@ import {
   Body,
   HttpException,
   HttpStatus,
+  Render,
 } from '@nestjs/common';
 
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -18,7 +19,7 @@ import { ProjectService } from './project.service';
 import { ProjectDto } from './dto/project.dto';
 
 @ApiTags('Project')
-@Controller('project')
+@Controller('')
 export class ProjectController {
   constructor(private projectService: ProjectService) {}
 
@@ -33,9 +34,11 @@ export class ProjectController {
     status: 200,
     description: 'OK',
   })
-  @Get('all')
-  public async getAllProjects(): Promise<Project[]> {
-    return this.projectService.projects({});
+  @Get('/meet')
+  @Render('meet')
+  public async getAllProjects(): Promise<{ projects: Project[] }> {
+    const projects = await this.projectService.projects({});
+    return { projects };
   }
   @ApiOperation({
     summary: 'Add a new Project',
@@ -48,7 +51,7 @@ export class ProjectController {
     status: 200,
     description: 'OK',
   })
-  @Post('add')
+  @Post('project/add')
   public async addProject(@Body() projectData: ProjectDto): Promise<Project> {
     const { name, link, friendId } = projectData;
     return this.projectService.createProject({
@@ -71,7 +74,7 @@ export class ProjectController {
     status: 200,
     description: 'OK',
   })
-  @Delete('/:id')
+  @Delete('project/:id')
   public async deleteProjectById(@Param('id') id: number): Promise<Project> {
     const findProject = this.projectService.project({ id: Number(id) });
     if (findProject != null) {

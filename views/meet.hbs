@@ -63,6 +63,22 @@
       </article>
     </aside>
   </section>
+
+  <h2 class="review__title">Текущие проекты</h2>
+
+        {{#if projects.length}}
+          <ul>
+            {{#each projects}}
+                <li>
+                  <h3 class="projBd">{{this.name}}</h3>
+<!--                  <p>{{this.content}}</p>-->
+                </li>
+              {{/each}}
+          </ul>
+        {{else}}
+          <p>Нет текущих проектов.</p>
+        {{/if}}
+
   <section>
     <h3 class="review__subtitle">Комментарии!</h3>
     <h2 class="review__title">Обзор на работы Дракоши</h2>

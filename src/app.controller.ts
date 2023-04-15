@@ -8,19 +8,18 @@ import {
   Body,
   UploadedFile,
   UseInterceptors,
-  Param
+  Param,
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Response } from 'express';
-import { FileInterceptor } from "@nestjs/platform-express";
-import { TransformationInterceptor } from "./timer.interceptor";
+import { FileInterceptor } from '@nestjs/platform-express';
+import { TransformationInterceptor } from './timer.interceptor';
 // import { TimerInterceptor } from './timer.interceptor';
 
 @UseInterceptors(TransformationInterceptor)
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {
-  }
+  constructor(private readonly appService: AppService) {}
 
   @Get()
   @Render('index')
@@ -65,11 +64,11 @@ export class AppController {
     return {};
   }
 
-  @Get('/meet')
-  @Render('meet')
-  getMeet() {
-    return {};
-  }
+  // @Get('/meet')
+  // @Render('meet')
+  // getMeet() {
+  //   return {};
+  // }
 
   @Get('/skills')
   @Render('skills')
