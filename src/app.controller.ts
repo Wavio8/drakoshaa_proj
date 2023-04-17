@@ -9,11 +9,16 @@ import {
   UploadedFile,
   UseInterceptors,
   Param,
-} from '@nestjs/common';
+  UseGuards, UseFilters
+} from "@nestjs/common";
 import { AppService } from './app.service';
 import { Response } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { TransformationInterceptor } from './timer.interceptor';
+import { AuthGuard } from './auth/auth.guard';
+import { Session } from './auth/session.decorator';
+import { SessionContainer } from 'supertokens-node/recipe/session';
+// import { AuthAutorizedFilter } from "./auth/authAutorized.filter";
 // import { TimerInterceptor } from './timer.interceptor';
 
 @UseInterceptors(TransformationInterceptor)
@@ -21,7 +26,16 @@ import { TransformationInterceptor } from './timer.interceptor';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
+  @Get('test')
+  @UseGuards(new AuthGuard())
+  async getTest(@Session() session: SessionContainer): Promise<string> {
+    // TODO: magic
+    session.getAccessToken();
+    return 'magic';
+  }
+
   @Get()
+  @UseGuards(new AuthGuard())
   @Render('index')
   root() {
     return {};
@@ -30,6 +44,11 @@ export class AppController {
   @Get('/ask')
   @Render('askNotLogin')
   getAsk() {
+    return;
+  }
+  @Get('/loginss')
+  @Render('loginAuth')
+  getAskss() {
     return;
   }
 

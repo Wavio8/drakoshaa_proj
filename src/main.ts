@@ -6,6 +6,11 @@ import { join } from 'path';
 import * as hbs from 'hbs';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
+import supertokens from 'supertokens-node';
+import { SupertokensExceptionFilter } from './auth/auth.filter';
+// import { AutorizedFilter } from './auth/autorized.filter';
+// import { AuthAutorizedFilter } from './auth/authAutorized.filter';
+// import { AuthAutorizedFilter } from "./auth/authAutorized.filter";
 
 async function bootstrap() {
   // const app = await NestFactory.create(AppModule);
@@ -15,6 +20,16 @@ async function bootstrap() {
   hbs.registerPartials(join(__dirname, '..', 'views/partials'));
   app.setViewEngine('hbs');
   app.useGlobalPipes(new ValidationPipe());
+  // app.useGlobalFilters(new AuthAutorizedFilter());
+  app.useGlobalFilters(new SupertokensExceptionFilter());
+  // app.useGlobalFilters(new AutorizedFilter());
+
+  app.enableCors({
+    origin: ['http://localhost:3001'],
+    allowedHeaders: ['content-type', ...supertokens.getAllCORSHeaders()],
+    credentials: true,
+  });
+
 
   const config = new DocumentBuilder()
     .setTitle('Drakosha world')
