@@ -23,8 +23,8 @@ import * as process from 'process';
       appInfo: {
         // Learn more about this on https://supertokens.com/docs/thirdparty/appinfo
         appName: 'drakoshaa',
-        apiDomain: 'http://localhost',
-        websiteDomain: 'http://localhost:3001',
+        apiDomain: process.env.ORIGIN,
+        websiteDomain: process.env.ORIGIN,
         apiBasePath: '/auth',
         websiteBasePath: '/auth',
       },

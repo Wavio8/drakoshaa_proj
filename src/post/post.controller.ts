@@ -13,11 +13,17 @@ import {
   UseFilters,
 } from '@nestjs/common';
 import { PostService } from './post.service';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBasicAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { Posts } from '@prisma/client';
 import { PostDto } from './dto/post.dto';
 import { HttpExceptionFilter } from '../HttpExceptionFilter';
 
+@ApiBasicAuth()
 @ApiTags('Post')
 @Controller('post')
 export class PostController {

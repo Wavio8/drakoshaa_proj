@@ -12,12 +12,18 @@ import {
   Render,
 } from '@nestjs/common';
 
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBasicAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { Friend, Posts, Project, User } from '@prisma/client';
 import { ProjectService } from './project.service';
 
 import { ProjectDto } from './dto/project.dto';
 
+@ApiBasicAuth()
 @ApiTags('Project')
 @Controller('')
 export class ProjectController {

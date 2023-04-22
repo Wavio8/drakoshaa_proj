@@ -11,12 +11,18 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 
-import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBasicAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { User } from '@prisma/client';
 
 import { UserService } from './user.service';
 import { UserDto } from './dto/user.dto';
 
+@ApiBasicAuth()
 @ApiTags('User')
 @Controller('user')
 export class UserController {

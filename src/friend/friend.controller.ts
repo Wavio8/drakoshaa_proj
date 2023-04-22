@@ -9,13 +9,19 @@ import {
   Post,
 } from '@nestjs/common';
 import { FriendService } from './friend.service';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBasicAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { Friend, FriendToSkill } from '@prisma/client';
 import { FriendDto } from './dto/friend.dto';
 import { FriendToSkillDto } from './dto/friendToSkill.dto';
 import { FriendToSkillService } from './friendToSkill.service';
 import { StudentSkillDto } from './dto/studentSkill.dto';
 
+@ApiBasicAuth()
 @ApiTags('Friend')
 @Controller('friend')
 export class FriendController {

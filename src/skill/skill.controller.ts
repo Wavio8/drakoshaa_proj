@@ -6,16 +6,24 @@ import {
   Post,
   Query,
   Param,
-  Body, HttpException, HttpStatus
-} from "@nestjs/common";
+  Body,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBasicAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { Skill, User } from '@prisma/client';
 
 import { SkillService } from './skill.service';
-import { UserDto } from "../user/dto/user.dto";
-import { SkillDto } from "./dto/skill.dto";
+import { UserDto } from '../user/dto/user.dto';
+import { SkillDto } from './dto/skill.dto';
 
+@ApiBasicAuth()
 @ApiTags('Skill')
 @Controller('skill')
 export class SkillController {

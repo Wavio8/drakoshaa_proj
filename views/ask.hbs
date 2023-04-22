@@ -1,3 +1,26 @@
+<!-- https://supertokens.com/docs/emailpassword/custom-ui/init/frontend -->
+<script src="https://cdn.jsdelivr.net/gh/supertokens/supertokens-web-js/bundle/website.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/supertokens/supertokens-web-js/bundle/supertokens.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/supertokens/supertokens-web-js/bundle/session.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/supertokens/supertokens-web-js/bundle/emailpassword.js"></script>
+<script>
+  supertokens.init({
+    appInfo: {
+      appName: 'drakoshaa',
+      apiDomain: `${location.protocol}//${location.host}`,
+      apiBasePath: '/auth',
+    },
+    recipeList: [supertokensSession.init(), supertokensEmailPassword.init({ cookieSameSite: 'lax' })],
+  });
+</script>
+
+<!-- https://supertokens.com/docs/emailpassword/custom-ui/sign-out -->
+<script>
+  async function logout() {
+    await supertokensSession.signOut();
+    window.location.href = '/ask';
+  }
+</script>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -11,9 +34,11 @@
 
 <main>
  <div class="logged">
-   <h2 class="logged__subtitle">You logged as {{user}}!</h2>
-   <a class="blubtn" href='/ask' type="button" >Log Out</a>
+   <h2 class="logged__subtitle">You logged as {{ hello }} !</h2>
+   <a class="blubtn" onclick="logout()" type="button" >Log Out</a>
+
  </div>
+
 
   <section class="footer_section">
     <h3 class="review__subtitle">Передай пожелание Дракоше! </h3>

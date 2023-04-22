@@ -1,3 +1,112 @@
+<!-- https://supertokens.com/docs/emailpassword/custom-ui/init/frontend -->
+<script src="https://cdn.jsdelivr.net/gh/supertokens/supertokens-web-js/bundle/website.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/supertokens/supertokens-web-js/bundle/supertokens.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/supertokens/supertokens-web-js/bundle/session.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/supertokens/supertokens-web-js/bundle/emailpassword.js"></script>
+<script>
+  supertokens.init({
+    appInfo: {
+      appName: 'drakoshaa',
+      apiDomain: `${location.protocol}//${location.host}`,
+      apiBasePath: '/auth',
+    },
+    recipeList: [supertokensSession.init(), supertokensEmailPassword.init({ cookieSameSite: 'lax' })],
+  });
+</script>
+
+<script>
+  async function signUpClicked(email, password) {
+    try {
+      console.log(email);
+      console.log(password);
+      let response = await supertokensEmailPassword.signUp({
+        formFields: [
+          {
+            id: 'email',
+            value: email,
+          },
+          {
+            id: 'password',
+            value: password,
+          },
+        ],
+      });
+      console.log('vxod');
+      if (response.status === 'FIELD_ERROR') {
+        console.log('err');
+        // one of the input formFields failed validaiton
+        response.formFields.forEach((formField) => {
+          if (formField.id === 'email') {
+            // Email validation failed (for example incorrect email syntax),
+            // or the email is not unique.
+            window.alert(formField.error);
+          } else if (formField.id === 'password') {
+            // Password validation failed.
+            // Maybe it didn't match the password strength
+            window.alert(formField.error);
+          }
+        });
+      } else {
+        // sign up successful. The session tokens are automatically handled by
+        // the frontend SDK.
+        console.log('noterr');
+        window.location.href = '/ask/protect';
+      }
+    } catch (err) {
+      console.error(err);
+      if (err.isSuperTokensGeneralError === true) {
+        // this may be a custom error message sent from the API by you.
+        window.alert(err.message);
+      } else {
+        window.alert('Oops! Something went wrong.');
+      }
+    }
+  }
+
+  async function signInClicked(email, password) {
+    try {
+
+      let response = await supertokensEmailPassword.signIn({
+        formFields: [
+          {
+            id: 'email',
+            value: email,
+          },
+          {
+            id: 'password',
+            value: password,
+          },
+        ],
+      });
+
+      if (response.status === 'FIELD_ERROR') {
+        // one of the input formFields failed validaiton
+        response.formFields.forEach((formField) => {
+          if (formField.id === 'email') {
+            // Email validation failed (for example incorrect email syntax).
+            window.alert(formField.error);
+          }
+        });
+      } else if (response.status === 'WRONG_CREDENTIALS_ERROR') {
+        window.alert('Email password combination is incorrect.');
+      } else {
+        // sign in successful. The session tokens are automatically handled by
+        // the frontend SDK.
+        window.location.href = '/ask/protect';
+      }
+    } catch (err) {
+      console.error(err);
+      if (err.isSuperTokensGeneralError === true) {
+        // this may be a custom error message sent from the API by you.
+        window.alert(err.message);
+      } else {
+        window.alert('Oops! Something went wrong.');
+      }
+    }
+  }
+</script>
+
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -31,15 +140,50 @@
 
       <div id="login">
 
-        <form action="/login" method="post">
+<!--        <form action="/login" method="post">-->
+<!--        <form>-->
           <fieldset class="clearfix">
-            <p><span class="fontawesome-user"></span><input type="text" value="Username" name="pass" onBlur="if(this.value == '') this.value = 'Username'" onFocus="if(this.value == 'Username') this.value = ''" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
-            <p><span class="fontawesome-lock"></span><input type="password"  value="Password" onBlur="if(this.value == '') this.value = 'Password'" onFocus="if(this.value == 'Password') this.value = ''" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
-            <p><input type="submit" value="Sign In"></p>
+<!--            Email <input name="email" value="demo@example.com" /><br />-->
+<!--            Password <input name="password" value="1234567e" /><br />-->
+            <p><span class="fontawesome-user"></span><input type="text" value="demo@example.com" name="email" onBlur="if(this.value == '') this.value = 'Username'" onFocus="if(this.value == 'Username') this.value = ''" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
+            <p><span class="fontawesome-lock"></span><input name="password" value="1234567e" type="password"  onBlur="if(this.value == '') this.value = 'Password'" onFocus="if(this.value == 'Password') this.value = ''" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
+<!--            <p><span class="fontawesome-user"></span><input type="text" value="email" name="email" onBlur="if(this.value == '') this.value = 'Username'" onFocus="if(this.value == 'Username') this.value = ''" required></p> &lt;!&ndash; JS because of IE support; better: placeholder="Username" &ndash;&gt;-->
+<!--            <p><span class="fontawesome-lock"></span><input type="password" name="password" value="1234567e" onBlur="if(this.value == '') this.value = 'Password'" onFocus="if(this.value == 'Password') this.value = ''" required></p> &lt;!&ndash; JS because of IE support; better: placeholder="Password" &ndash;&gt;-->
+
+<!--            Email <input name="email" value="demo@example.com" /><br />-->
+<!--            Password <input name="password" value="1234567e" /><br />-->
+            <button
+              onclick="signUpClicked(document.getElementsByName('email')[0].value, document.getElementsByName('password')[0].value)"
+            >
+              Sign up
+            </button>
+            <button
+              onclick="signInClicked(document.getElementsByName('email')[0].value, document.getElementsByName('password')[0].value)"
+            >
+              Log in
+            </button>
+<!--            <p><span class="fontawesome-user"></span><input type="text" value="Username" name="pass" onBlur="if(this.value == '') this.value = 'Username'" onFocus="if(this.value == 'Username') this.value = ''" required></p> &lt;!&ndash; JS because of IE support; better: placeholder="Username" &ndash;&gt;-->
+<!--            <p><span class="fontawesome-lock"></span><input type="password"  value="Password" onBlur="if(this.value == '') this.value = 'Password'" onFocus="if(this.value == 'Password') this.value = ''" required></p> &lt;!&ndash; JS because of IE support; better: placeholder="Password" &ndash;&gt;-->
+<!--            <p><input type="submit" value="Sign In"></p>-->
           </fieldset>
-        </form>
+<!--        </form>-->
       </div> <!-- end login -->
     </div>
+
+<!--    <div>-->
+<!--      Email <input name="email" value="demo@example.com" /><br />-->
+<!--      Password <input name="password" value="1234567e" /><br />-->
+<!--      <button-->
+<!--        onclick="signUpClicked(document.getElementsByName('email')[0].value, document.getElementsByName('password')[0].value)"-->
+<!--      >-->
+<!--        Sign up-->
+<!--      </button>-->
+<!--      <button-->
+<!--        onclick="signInClicked(document.getElementsByName('email')[0].value, document.getElementsByName('password')[0].value)"-->
+<!--      >-->
+<!--        Log in-->
+<!--      </button>-->
+<!--    </div>-->
 
 
   </section>

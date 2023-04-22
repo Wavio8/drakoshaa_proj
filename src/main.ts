@@ -25,11 +25,10 @@ async function bootstrap() {
   // app.useGlobalFilters(new AutorizedFilter());
 
   app.enableCors({
-    origin: ['http://localhost:3001'],
+    origin: [process.env.ORIGIN],
     allowedHeaders: ['content-type', ...supertokens.getAllCORSHeaders()],
     credentials: true,
   });
-
 
   const config = new DocumentBuilder()
     .setTitle('Drakosha world')

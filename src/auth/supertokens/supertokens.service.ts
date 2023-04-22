@@ -3,6 +3,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import supertokens from 'supertokens-node';
 import Session from 'supertokens-node/recipe/session';
 // import Session from "supertokens-auth-react/recipe/session";
+import Dashboard from 'supertokens-node/recipe/dashboard';
 
 import EmailPassword from 'supertokens-node/recipe/emailpassword';
 
@@ -17,7 +18,11 @@ export class SupertokensService {
         connectionURI: config.connectionURI,
         apiKey: config.apiKey,
       },
-      recipeList: [EmailPassword.init(), Session.init()],
+      recipeList: [
+        Dashboard.init(),
+        EmailPassword.init(),
+        Session.init({ cookieSameSite: 'lax' }),
+      ],
     });
   }
 }

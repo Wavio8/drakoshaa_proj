@@ -3,6 +3,7 @@ import { middleware } from 'supertokens-node/framework/express';
 import Session from 'supertokens-node/recipe/session';
 import { VerifySessionOptions } from 'supertokens-node/recipe/session';
 import { verifySession } from 'supertokens-node/recipe/session/framework/express';
+// import { attachAuth } from 'supertokens-website';
 
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
@@ -15,6 +16,7 @@ export class AuthMiddleware implements NestMiddleware {
   use(req: Request, res: any, next: () => void) {
     // const options: VerifySessionOptions = {
     //   sessionRequired: true,
+
     // };
 
     return this.supertokensMiddleware(req, res, next);
