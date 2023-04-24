@@ -62,7 +62,7 @@ export class AppController {
         console.log(uu.getUserId());
       }
     } catch (error) {
-      console.log('Ошибка:');
+      console.log('1');
     }
     return {};
   }

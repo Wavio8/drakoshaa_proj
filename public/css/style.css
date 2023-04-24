@@ -625,3 +625,59 @@ a.blubtn:active {
 .projBd{
     color: #444c65;
 }
+
+#messages{
+    height:300px;
+    overflow-y: scroll;
+}
+
+#app {
+    margin-top: 2rem;
+}
+.sent {
+    text-align: right;
+    color: white;
+    background-color: #9999ff;
+}
+.container_chat{
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header_chat{
+    width: 100%;
+    margin: 0;
+
+    padding-top: 20px;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+
+    position: absolute;
+
+}
+.welcome__chat{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    background:
+            url("images/first.jpg") center no-repeat;
+    -webkit-background-size: cover;
+    background-size: cover;
+    font-weight: bold;
+}
+.body__chat{
+    width: 100%;
+    margin: 0;
+}
+.text-center{
+    color: #9999ff;
+    -webkit-text-stroke: 2px #000000;
+}

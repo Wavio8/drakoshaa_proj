@@ -8,6 +8,7 @@ import { SkillModule } from './skill/skill.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import * as process from 'process';
+import { ChatModule } from "./chatSocket/chat.module";
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import * as process from 'process';
     ProjectModule,
     SkillModule,
     UserModule,
+    ChatModule,
     AuthModule.forRoot({
       // These are the connection details of the app you created on supertokens.com
       connectionURI: process.env.CONNECTION_URI,
